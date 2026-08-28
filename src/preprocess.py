@@ -1,6 +1,36 @@
 import pandas as pd
 
 
+def validate_columns(df, required_columns):
+    """
+    Verifica que el DataFrame contenga todas las columnas requeridas.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame que se desea validar.
+
+    required_columns : list
+        Lista de columnas necesarias.
+
+    Raises
+    ------
+    ValueError
+        Si falta alguna columna requerida.
+    """
+
+    missing_columns = [
+        column
+        for column in required_columns
+        if column not in df.columns
+    ]
+
+    if missing_columns:
+        raise ValueError(
+            "Faltan columnas requeridas: "
+            f"{missing_columns}"
+        )
+
 def clean_data(df):
     """
     Realiza la limpieza básica del DataFrame.
@@ -177,10 +207,27 @@ def prepare_prediction_data(df):
 
 
 def preprocess_data(df, fecha_corte="2020-02-01"):
+
     """
-    Ejecuta todo el flujo de limpieza e ingeniería
-    de características.
+    Ejecuta la limpieza y creación de características.
     """
+
+    required_columns = [
+        "BeginDate",
+        "TotalCharges",
+        "InternetService",
+        "OnlineSecurity",
+        "OnlineBackup",
+        "DeviceProtection",
+        "TechSupport",
+        "StreamingTV",
+        "StreamingMovies"
+    ]
+
+    validate_columns(
+        df,
+        required_columns
+    )
 
     df = clean_data(df)
 
