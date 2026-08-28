@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import (accuracy_score, precision_score, recall_score, f1_score, roc_auc_score)
 
 from lightgbm import LGBMClassifier
+from src.config import LGBM_PARAMS
 
 from src.preprocess import (
     preprocess_data,
@@ -62,15 +63,7 @@ def train_model(df):
     # ==========================
 
     model = LGBMClassifier(
-        colsample_bytree=0.9,
-        max_depth=4,
-        min_child_samples=50,
-        n_estimators=700,
-        n_jobs=1,
-        objective="binary",
-        random_state=12345,
-        subsample=0.8,
-        verbosity=-1
+        **LGBM_PARAMS
     )
 
     model.fit(
