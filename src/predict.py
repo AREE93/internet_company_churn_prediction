@@ -59,6 +59,26 @@ def predict_churn(df):
     )
 
     # ==========================
+    # VALIDAR FEATURES
+    # ==========================
+
+    expected_features = model.feature_name_
+
+    missing_features = set(expected_features) - set(X.columns)
+
+    extra_features = set(X.columns) - set(expected_features)
+
+    if missing_features:
+        raise ValueError(
+            f"Faltan columnas necesarias para la predicción: "
+            f"{sorted(missing_features)}"
+        )
+
+    if extra_features:
+        X = X[expected_features]
+
+
+    # ==========================
     # COLUMNAS CATEGÓRICAS
     # ==========================
 
