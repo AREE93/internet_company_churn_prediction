@@ -14,6 +14,6 @@ COPY api/ ./api/
 COPY src/ ./src/
 COPY models/ ./models/
 
-EXPOSE 8000
+EXPOSE 10000
 
-CMD ["python", "-m", "fastapi", "run", "api/main.py", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "fastapi", "run", "api/main.py", "--host", "0.0.0.0", "--port", "10000"]
