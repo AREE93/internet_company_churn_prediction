@@ -1,4 +1,4 @@
-🇲🇽 Español | 🇺🇸 [English](README.md)
+🇺🇸 English | 🇲🇽 [Español](README_ES.md)
 
 # Interconnect Customer Churn Prediction & Retention Analytics
 
