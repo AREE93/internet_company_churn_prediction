@@ -1,12 +1,12 @@
 🇲🇽 Español | 🇺🇸 [English](README.md)
 
 
-Predicción de Churn de Clientes — Internet Company
+# Predicción de Churn de Clientes — Internet Company
 
 
 Proyecto de Machine Learning para predecir la cancelación de clientes (churn) de una empresa de telecomunicaciones. El proyecto cubre el flujo completo, desde el análisis y procesamiento de datos hasta el entrenamiento, evaluación, interpretación y despliegue de un modelo de Machine Learning mediante una API REST.
 
-🚀 API en producción
+## 🚀 API en producción
 
 API desplegada en Render:
 
