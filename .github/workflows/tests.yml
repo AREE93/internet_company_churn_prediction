@@ -27,6 +27,10 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-api.txt
 
+      - name: Create test model
+        run: |
+          python tests/create_test_model.py
+
       - name: Run tests
         run: |
           python -m pytest -v
