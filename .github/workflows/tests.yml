@@ -29,7 +29,7 @@ jobs:
 
       - name: Create test model
         run: |
-          python tests/create_test_model.py
+          python -m tests.create_test_model
 
       - name: Run tests
         run: |
