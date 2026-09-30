@@ -1,5 +1,5 @@
 
-🇲🇽 Spanish | 🇺🇸 English
+🇺🇸 English | 🇲🇽 [Español](README_ES.md)
 
 
 # Customer Churn Prediction — Internet Company
