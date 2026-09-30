@@ -1,7 +1,8 @@
+
 🇲🇽 Español | 🇺🇸 [English](README.md)
 
 
-# Predicción de Churn de Clientes — Internet Company
+# Predicción de Churn de Clientes — Compañía Telecomunicaciones
 
 
 Proyecto de Machine Learning para predecir la cancelación de clientes (churn) de una empresa de telecomunicaciones. El proyecto cubre el flujo completo, desde el análisis y procesamiento de datos hasta el entrenamiento, evaluación, interpretación y despliegue de un modelo de Machine Learning mediante una API REST.
@@ -23,7 +24,9 @@ Ejemplo de respuesta
   "churn_predicho": 1,
   "probabilidad_churn": 0.9999956167096107
 }
-📌 Descripción del proyecto
+
+
+### 📌 Descripción del proyecto
 
 El objetivo principal es desarrollar un modelo capaz de identificar clientes con riesgo de abandonar el servicio.
 
@@ -41,7 +44,9 @@ Guardado del modelo entrenado.
 Desarrollo de una API REST con FastAPI.
 Containerización mediante Docker.
 Despliegue en Render.
-📊 Dataset
+
+
+### 📊 Dataset
 
 El proyecto utiliza datos de clientes de una empresa de telecomunicaciones.
 
@@ -66,7 +71,9 @@ Donde:
 
 1 → El cliente abandonó el servicio.
 0 → El cliente continúa activo.
-⚙️ Preprocesamiento e ingeniería de características
+
+
+### ⚙️ Preprocesamiento e ingeniería de características
 
 El pipeline de procesamiento incluye limpieza, validación e ingeniería de características.
 
@@ -101,7 +108,8 @@ MonthlyAvgCharge
 
 Esta característica también fue evaluada durante el proceso de modelado, pero finalmente fue descartada del modelo final.
 
-🤖 Modelos evaluados
+
+### 🤖 Modelos evaluados
 
 Se compararon diferentes algoritmos de Machine Learning:
 
@@ -122,7 +130,8 @@ Dummy	73.48%	0.00%	0.00%	0.00%	50.00%
 
 LightGBM fue seleccionado como modelo final debido a su combinación de desempeño general y ROC-AUC.
 
-🏆 Modelo final — LightGBM
+
+### 🏆 Modelo final — LightGBM
 
 El modelo final utiliza LightGBM con los siguientes parámetros:
 
@@ -144,7 +153,8 @@ models/lightgbm_model.joblib
 
 El archivo del modelo no se incluye directamente en el repositorio debido a su tamaño y está gestionado mediante un GitHub Release.
 
-🔎 Análisis e interpretabilidad
+
+### 🔎 Análisis e interpretabilidad
 
 Durante el análisis del modelo se utilizaron técnicas de interpretación para comprender qué variables tienen mayor influencia sobre las predicciones.
 
@@ -155,7 +165,8 @@ SHAP.
 
 Estas herramientas permiten analizar el comportamiento del modelo y relacionar sus predicciones con las características de los clientes.
 
-📊 Análisis anterior con Power BI
+
+### 📊 Análisis anterior con Power BI
 
 Como parte de las etapas iniciales del proyecto también se realizó un análisis exploratorio y de negocio mediante Power BI.
 
@@ -168,7 +179,8 @@ Comportamiento de los clientes.
 
 El análisis de Power BI corresponde a una etapa previa del proyecto, mientras que la versión actual se enfoca en llevar el modelo de Machine Learning a una etapa de producción.
 
-🌐 API REST
+
+### 🌐 API REST
 
 La aplicación utiliza FastAPI para exponer el modelo mediante una API REST.
 
@@ -179,6 +191,7 @@ Recibe la información de un cliente y devuelve:
 
 Predicción de churn.
 Probabilidad de churn.
+
 Ejemplo de entrada
 {
   "customerID": "TEST001",
@@ -206,12 +219,15 @@ Ejemplo de salida
   "churn_predicho": 1,
   "probabilidad_churn": 0.9999956167096107
 }
+
 Swagger
 
 FastAPI genera automáticamente una interfaz interactiva para probar la API:
 
 /docs
-🐳 Docker
+
+
+### 🐳 Docker
 
 La API está containerizada mediante Docker.
 
@@ -232,7 +248,9 @@ Puerto
 La aplicación utiliza el puerto:
 
 10000
-☁️ Despliegue en Render
+
+
+### ☁️ Despliegue en Render
 
 La API está desplegada actualmente en Render.
 
@@ -265,7 +283,8 @@ Modelo entrenado.
 
 Render ejecuta posteriormente el contenedor y expone la API públicamente.
 
-🧪 Tests
+
+### 🧪 Tests
 
 El proyecto incluye pruebas utilizando pytest.
 
@@ -278,7 +297,10 @@ python -m pytest -v
 Resultado actual:
 
 2 passed
-📁 Estructura del proyecto
+
+
+### 📁 Estructura del proyecto
+
 internet_company_churn_prediction/
 │
 ├── data/
@@ -309,7 +331,10 @@ internet_company_churn_prediction/
 ├── README_ES.md
 ├── requirements.txt
 └── requirements-api.txt
-🛠️ Tecnologías
+
+
+### 🛠️ Tecnologías
+
 Lenguaje
 Python
 Data Science
@@ -336,7 +361,9 @@ Control de versiones
 Git
 GitHub
 SSH
-💼 Recomendaciones de negocio
+
+
+### 💼 Recomendaciones de negocio
 
 El modelo de churn puede utilizarse como una herramienta de apoyo para identificar clientes con mayor riesgo de abandono.
 
@@ -350,20 +377,25 @@ Priorizar clientes según su probabilidad estimada de abandono.
 
 El modelo no sustituye las decisiones de negocio; proporciona información para apoyar estrategias de retención.
 
-🔮 Mejoras futuras
+
+### 🔮 Mejoras futuras
 
 Algunas posibles mejoras para futuras versiones:
 
-Implementar monitoreo del modelo.
-Crear una interfaz frontend para consumir la API.
-Agregar pruebas automatizadas para el endpoint /predict.
-Implementar validación más estricta del esquema de entrada mediante Pydantic.
-Automatizar el entrenamiento del modelo.
-Implementar CI/CD.
-Registrar métricas de producción.
-Implementar model versioning.
-Incorporar nuevas técnicas de optimización e interpretación.
-✅ Estado actual del proyecto
+- Implementar monitoreo del modelo.
+- Registrar métricas de producción.
+- Monitorizar data drift y prediction drift.
+- Crear una interfaz frontend para consumir la API.
+- Implementar predicciones por lote mediante archivos CSV.
+- Automatizar el entrenamiento y reentrenamiento del modelo con nuevos datos históricos.
+- Implementar autenticación y autorización para la API.
+- Implementar un sistema más completo de versionado y gestión de artefactos del modelo.
+- Incorporar pruebas de integración y pruebas de carga.
+- Explorar nuevas técnicas de optimización, selección de características e interpretación del modelo.
+- Evaluar diferentes umbrales de clasificación de acuerdo con los costos del negocio.
+
+
+### ✅ Estado actual del proyecto
 
 El proyecto cuenta actualmente con un flujo completo de Machine Learning hasta producción:
 
@@ -390,6 +422,7 @@ Docker
 Render
   ↓
 API en producción
+
 Estado
 
 🟢 Modelo entrenado
@@ -408,7 +441,8 @@ Estado
 
 🟢 Predicciones verificadas en producción
 
-👨‍💻 Autor
+
+### 👨‍💻 Autor
 
 Angel Enriquez
 

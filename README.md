@@ -1,189 +1,140 @@
-🇺🇸 English | 🇲🇽 [Español](README_ES.md)
 
-# Interconnect Customer Churn Prediction & Retention Analytics
+🇲🇽 Spanish | 🇺🇸 English
 
-Machine Learning project for predicting customer churn in a telecommunications company and supporting data-driven customer retention strategies.
 
-The project covers the complete workflow, from data preprocessing and feature engineering to model training, evaluation, interpretability, API deployment, and containerization.
+# Customer Churn Prediction — Internet Company
 
-## 🚀 Live API
 
-The prediction API is deployed and available through Render:
+Machine Learning project to predict customer churn for a telecommunications company. The project covers an end-to-end workflow, from data analysis and processing to model training, evaluation, interpretation, REST API exposure, containerization, automated testing, and production deployment.
 
-**API:** https://internet-company-churn-prediction.onrender.com
+## 🚀 Production API
 
-**Swagger documentation:** https://internet-company-churn-prediction.onrender.com/docs
+API deployed on Render:
 
-The API receives customer information and returns:
+https://internet-company-churn-prediction.onrender.com
 
-* Churn prediction
-* Churn probability
+Swagger UI:
 
-Example response:
+https://internet-company-churn-prediction.onrender.com/docs
 
-```json
+The API accepts customer information and returns a churn prediction together with its probability.
+
+Example response
 {
   "churn_predicho": 1,
   "probabilidad_churn": 0.9999956167096107
 }
-```
 
----
 
-## 📌 Project Overview
+### 📌 Project Overview
 
-Customer churn is an important business problem for telecommunications companies because retaining existing customers can be more efficient than acquiring new ones.
+The main objective is to develop a model capable of identifying customers at risk of leaving the service.
 
-This project develops a Machine Learning solution capable of identifying customers with a higher probability of cancelling their service.
+The project follows a complete Data Science, Machine Learning, and deployment workflow:
 
-The solution combines:
+Data loading and preparation.
+Data cleaning and validation.
+Feature engineering.
+Target variable definition.
+Comparison of different models.
+Evaluation using multiple metrics.
+Selection and optimization of the final model.
+Model interpretation.
+Saving the trained model.
+Development of a REST API with FastAPI.
+Containerization with Docker.
+Deployment on Render.
 
-* Exploratory Data Analysis
-* Data cleaning
-* Feature engineering
-* Machine Learning model comparison
-* Model optimization
-* Model interpretability
-* Power BI visualization
-* REST API development
-* Docker containerization
-* Cloud deployment
 
-The final objective is not only to predict churn, but also to provide information that can support customer retention decisions.
+### 📊 Dataset
 
----
+The project uses customer data from a telecommunications company.
 
-## 🎯 Business Objective
+The original variables include:
 
-Develop a predictive solution capable of identifying customers at risk of churn so that the retention team can:
+Demographic information.
+Subscribed services.
+Contract type.
+Payment method.
+Paperless billing.
+Monthly charges.
+Total charges.
+Start date.
+End date.
+Target variable
 
-* Identify high-risk customers.
-* Prioritize retention actions.
-* Design targeted campaigns.
-* Detect patterns associated with customer cancellation.
-* Monitor churn risk.
-* Measure the impact of retention strategies.
+The Churn variable is created from EndDate:
 
----
-
-## 📊 Dataset
-
-The dataset contains information about customers, their contracted services, demographic characteristics, charges, and relationship duration with the company.
-
-Relevant variables include:
-
-* `InternetService`
-* `OnlineSecurity`
-* `OnlineBackup`
-* `DeviceProtection`
-* `TechSupport`
-* `StreamingTV`
-* `StreamingMovies`
-* `Type`
-* `PaperlessBilling`
-* `PaymentMethod`
-* `MonthlyCharges`
-* `TotalCharges`
-* `gender`
-* `SeniorCitizen`
-* `Partner`
-* `Dependents`
-* `MultipleLines`
-* `BeginDate`
-* `EndDate`
-
-The target variable `Churn` was created from the existence of a customer cancellation date:
-
-```python
 df["Churn"] = df["EndDate"].notna().astype(int)
-```
 
----
+Where:
 
-## 🔧 Data Preprocessing & Feature Engineering
-
-The preprocessing pipeline was designed to be reusable for both model training and new customer predictions.
-
-The main transformations include:
-
-* Date conversion and cleaning.
-* Conversion of `TotalCharges` to numeric format.
-* Missing-value treatment.
-* Target creation.
-* Customer tenure calculation.
-* Categorical feature preparation.
-* Train/test splitting.
-
-### Engineered Features
-
-Additional features were created to capture customer behavior and service characteristics:
-
-* `TenureMonths`
-* `NumServices`
-* `HasInternet`
-* `HasStreaming`
-* `SecurityPack`
-
-`MonthlyAvgCharge` was also evaluated during feature experimentation but was not included in the final model.
-
-The final preprocessing pipeline is implemented in:
-
-```text
-src/preprocess.py
-```
-
----
-
-## 🤖 Models Evaluated
-
-Several classification algorithms were compared:
-
-* Dummy Classifier
-* Logistic Regression
-* Decision Tree
-* Random Forest
-* CatBoost
-* LightGBM
-
-The `Dummy Classifier` was used as a baseline to establish a reference level of performance.
-
----
-
-## 📈 Model Evaluation
-
-The models were evaluated using multiple classification metrics:
-
-* Accuracy
-* Precision
-* Recall
-* F1 Score
-* ROC-AUC
-
-The comparison was not based exclusively on Accuracy. Precision, Recall, F1 Score, and ROC-AUC were also considered in the context of the business objective.
-
-### Model Comparison
-
-| Model               | Accuracy | Precision | Recall |     F1 | ROC-AUC |
-| ------------------- | -------: | --------: | -----: | -----: | ------: |
-| Logistic Regression |   74.28% |    50.94% | 80.94% | 62.53% |  84.98% |
-| CatBoost            |   86.26% |    70.27% | 83.51% | 76.32% |  93.40% |
-| LightGBM            |   90.12% |    86.17% | 74.73% | 80.05% |  94.14% |
-| Random Forest       |   82.74% |    73.35% | 54.82% | 62.75% |  86.25% |
-| Decision Tree       |   72.23% |    48.68% | 86.94% | 62.41% |  86.18% |
-| Dummy               |   73.48% |     0.00% |  0.00% |  0.00% |  50.00% |
+1 → The customer left the service.
+0 → The customer remains active.
 
 
-> **Note:** The table above documents the model-comparison results from the project evaluation. The final LightGBM pipeline was subsequently refined through feature and hyperparameter adjustments.
+### ⚙️ Preprocessing and Feature Engineering
 
----
+The processing pipeline includes data cleaning, validation, and feature engineering.
 
-## 🏆 Final Model
+Created features
+TenureMonths
 
-After model comparison and subsequent tuning, **LightGBM was selected as the final model**.
+Approximate number of months the customer has remained with the company.
 
-The final model uses the following configuration:
+NumServices
 
-```python
+Number of additional subscribed services:
+
+OnlineSecurity
+OnlineBackup
+DeviceProtection
+TechSupport
+StreamingTV
+StreamingMovies
+HasInternet
+
+Indicates whether the customer has an Internet service.
+
+HasStreaming
+
+Indicates whether the customer uses any streaming services.
+
+SecurityPack
+
+Indicates whether the customer has security or protection-related services.
+
+MonthlyAvgCharge
+
+This feature was also evaluated during the modeling process but was ultimately excluded from the final model.
+
+
+### 🤖 Evaluated Models
+
+Different Machine Learning algorithms were compared:
+
+Logistic Regression
+CatBoost
+LightGBM
+Random Forest
+Decision Tree
+Dummy Classifier
+Results
+Model	Accuracy	Precision	Recall	F1	ROC-AUC
+Logistic Regression	74.28%	50.94%	80.94%	62.53%	84.98%
+CatBoost	86.26%	70.27%	83.51%	76.32%	93.40%
+LightGBM	90.12%	86.17%	74.73%	80.05%	94.14%
+Random Forest	82.74%	73.35%	54.82%	62.75%	86.25%
+Decision Tree	72.23%	48.68%	86.94%	62.41%	86.18%
+Dummy	73.48%	0.00%	0.00%	0.00%	50.00%
+
+LightGBM was selected as the final model based on its overall performance and ROC-AUC.
+
+
+### 🏆 Final Model — LightGBM
+
+The final model uses LightGBM with the following parameters:
+
 LGBMClassifier(
     colsample_bytree=0.9,
     max_depth=4,
@@ -195,80 +146,55 @@ LGBMClassifier(
     subsample=0.8,
     verbosity=-1
 )
-```
 
-The model is serialized locally using `joblib`:
+The trained model is serialized using joblib.
 
 ```text
 models/lightgbm_model.joblib
 ```
 
-The model artifact is intentionally excluded from Git version control because of its size and is distributed through the project's GitHub Release.
+The `.joblib` file is not included in source-code version control. The production model is managed through GitHub Release `v1.0.0` and downloaded during the Docker image build.
 
----
 
-## 🔎 Model Interpretability
+### 🔎 Analysis and interpretability
 
-Model interpretability was incorporated to understand which variables contribute most to the predictions.
+Model interpretability techniques were used to understand which variables have the greatest influence on predictions.
 
-Feature Importance was used to identify relevant variables, including:
+Among them:
 
-1. `TotalCharges`
-2. `TenureMonths`
-3. `MonthlyCharges`
-4. `Type`
-5. `gender`
-6. `InternetService`
-7. `OnlineBackup`
-8. `PaperlessBilling`
-9. `NumServices`
-10. `PaymentMethod`
+Feature Importance.
+SHAP.
 
-SHAP analysis was also incorporated to provide a deeper interpretation of model predictions and understand how individual characteristics influence churn risk.
+These tools make it possible to analyze model behavior and relate its predictions to customer characteristics.
 
----
 
-## 📊 Power BI Dashboard
+### 📊 Previous analysis with Power BI
 
-The project includes a Power BI dashboard designed to communicate the model results from a business perspective.
+As part of the initial project stages, exploratory and business analysis was also performed using Power BI.
 
-The dashboard allows analysis of:
+This analysis made it possible to identify patterns related to:
 
-* Model performance.
-* Customer risk distribution.
-* Churn probability.
-* Customers with higher predicted risk.
-* Feature importance.
-* Information relevant to retention strategies.
+Churn.
+Customer characteristics.
+Subscribed services.
+Customer behavior.
 
----
+The Power BI analysis corresponds to an earlier project stage, while the current version focuses on bringing the Machine Learning model into production.
 
-## 🌐 REST API
 
-The trained model is exposed through a REST API developed with **FastAPI**.
+### 🌐 API REST
 
-### Available endpoints
+The application uses FastAPI to expose the model through a REST API.
 
-#### `GET /`
+Principal Endpoint
+POST /predict
 
-Returns the API status.
+It receives customer information and returns:
 
-Example:
+Churn prediction.
+Churn probability.
 
-```json
-{
-  "message": "Internet Company Churn Prediction API",
-  "status": "running"
-}
-```
-
-#### `POST /predict`
-
-Receives customer information and returns the predicted churn class and probability.
-
-Example request:
-
-```json
+Example input
 {
   "customerID": "TEST001",
   "gender": "Female",
@@ -290,133 +216,104 @@ Example request:
   "MonthlyCharges": 70.5,
   "TotalCharges": "846.0"
 }
-```
-
-Example response:
-
-```json
+Example output
 {
   "churn_predicho": 1,
   "probabilidad_churn": 0.9999956167096107
 }
-```
 
-Interactive API documentation is available through Swagger:
+Swagger
 
-`/docs`
+FastAPI automatically generates an interactive interface for testing the API:
 
----
+/docs
 
-## 🐳 Docker
 
-The API was containerized using Docker.
+### 🐳 Docker
 
-The Docker image includes:
+The API is containerized with Docker.
 
-* Python 3.12
-* FastAPI
-* LightGBM
-* Required API dependencies
-* The trained model artifact
-* System dependencies required by LightGBM
+The image uses:
 
-The model is downloaded during the Docker build from the project's GitHub Release.
+FROM python:3.12-slim
 
-### Build the image
+It also installs libgomp1, which is required to run LightGBM inside the container.
 
-```bash
-docker build -t churn-api .
-```
+The model is downloaded during the image build process from the GitHub Release:
 
-### Run the container
+v1.0.0
 
-```bash
-docker run --rm -p 10000:10000 churn-api
-```
+This makes the model available inside the container even though it is not part of the Git repository.
 
-The API will then be available at:
+Port
 
-```text
-http://localhost:10000
-```
+The application uses port:
 
-Swagger:
+10000
 
-```text
-http://localhost:10000/docs
-```
 
----
+### ☁️ Render Deployment
 
-## ☁️ Deployment
+The API is currently deployed on Render.
 
-The application is deployed using **Render**.
+The project architecture is:
 
-Deployment architecture:
-
-```text
-Customer
+Client
    │
    ▼
 FastAPI
    │
    ▼
-Prediction Pipeline
-   │
-   ├── Data validation
-   ├── Data cleaning
-   ├── Feature engineering
-   └── Feature preparation
+Preprocessing
    │
    ▼
-LightGBM Model
+LightGBM
    │
    ▼
-Churn Prediction
+Prediction
    │
-   └── Churn probability
-```
+   ▼
+Churn probability
 
-The deployed service is available at:
+Docker packages:
 
-```text
-https://internet-company-churn-prediction.onrender.com
-```
+API.
+Processing code.
+Prediction code.
+Dependencies.
+Trained model.
 
----
+Render subsequently runs the container and exposes the API publicly.
 
-## 🧪 Testing
 
-The project includes automated tests for preprocessing validation using `pytest`.
+### 🧪 Tests
 
-Current tests verify:
+The project includes tests using pytest.
 
-* Successful validation when required columns are present.
-* Detection of missing required columns.
+There are currently 6 automated tests validating API status, valid and invalid inputs, required fields, allowed categories, and the structure and range of the prediction response.
 
-Run the tests with:
+Example:
 
-```bash
 python -m pytest -v
-```
 
----
-
-## 📁 Project Structure
+Current result in CI:
 
 ```text
+6 passed
+```
+
+
+### 📁 Project Structure
+
 internet_company_churn_prediction/
 │
 ├── data/
-│   ├── raw/
-│   └── processed/
 │
 ├── dashboards/
 │   └── images/
 │
 ├── models/
-│   ├── README.md
-│   └── .gitkeep
+│   └── lightgbm_model.joblib
 │
 ├── notebooks/
 │
@@ -427,118 +324,126 @@ internet_company_churn_prediction/
 │   ├── train.py
 │   └── predict.py
 │
-├── api/
-│   └── main.py
-│
 ├── tests/
 │   └── test_preprocess.py
 │
+├── api/
+│   └── main.py
+│
 ├── .gitignore
 ├── README.md
+├── README_ES.md
 ├── requirements.txt
 └── requirements-api.txt
-```
 
----
 
-## 🛠️ Technologies
+### 🛠️ Tecnologies
 
-### Data Science
-
-* Python
-* Pandas
-* NumPy
-* Scikit-learn
-* LightGBM
-* CatBoost
-* Matplotlib
-* Seaborn
-* SHAP
-* Jupyter Notebook
-
-### Data Visualization
-
-* Power BI
-
-### Deployment & Engineering
-
-* FastAPI
-* Docker
-* Git
-* GitHub
-* Render
-* Joblib
-* Pytest
-
----
-
-## 💼 Business Recommendations
-
-Based on the analysis and model predictions, potential retention actions include:
-
-1. Prioritize customers with high predicted churn probability.
-2. Implement segmented retention campaigns.
-3. Pay particular attention to customers with lower tenure.
-4. Analyze customers with higher monthly charges.
-5. Encourage longer-term contracts through personalized offers.
-6. Implement risk alerts based on model predictions.
-7. Measure the impact of retention campaigns.
-8. Periodically retrain the model using new customer data.
-
----
-
-## 🔮 Future Improvements
-
-Potential next steps for the project include:
-
-* Expand automated testing.
-* Add CI/CD with GitHub Actions.
-* Improve API input validation with Pydantic models.
-* Add model monitoring.
-* Monitor prediction drift and data drift.
-* Implement automated model retraining.
-* Add authentication to the API.
-* Improve the Power BI dashboard.
-* Add more detailed SHAP analysis.
-* Evaluate different classification thresholds according to business costs.
-
----
-
-## 👤 Project Status
-
-The project currently includes an end-to-end Machine Learning pipeline:
-
-```text
-Data
- ↓
-Preprocessing
- ↓
-Feature Engineering
- ↓
-Model Training
- ↓
-Model Evaluation
- ↓
+Python
+Pandas
+NumPy
+Scikit-learn
 LightGBM
- ↓
-Joblib
- ↓
+CatBoost
+SHAP
+Seaborn
+Matplotlib
+API
 FastAPI
- ↓
+Uvicorn
+Pytest
 Docker
- ↓
 Render
- ↓
-Production API
-```
+GitHub Releases
+Power BI
+Git
+GitHub
+SSH
 
-The prediction service has been successfully tested locally and in the deployed environment.
+
+### 💼 Business Recommendations
+
+The churn model can be used as a decision-support tool to identify customers at higher risk of leaving.
+
+Some possible actions:
+
+Identify high-risk customers.
+Design retention campaigns.
+Offer personalized discounts.
+Analyze the associated services with the highest churn.
+Prioritize customers according to their estimated probability of leaving.
+
+The model does not replace business decisions; it provides information to support retention strategies.
 
 
-👨‍💻 Autor
+### 🔮 Future Improvements
+
+Some possible improvements for future versions:
+
+- Implement model monitoring.
+- Log production metrics.
+- Monitor data drift and prediction drift.
+- Create a frontend interface to consume API.
+- Implement batch predictions using CSV files.
+- Automate model training and retraining with new historical data.
+- Implement authentication and authorization for API.
+- Implement a more comprehensive system for versioning and managing model artifacts.
+- Incorporate integration tests and load tests.
+- Explore new techniques for optimization, feature selection, and model interpretation.
+- Evaluate different classification thresholds based on business costs.
+
+
+### ✅ Current Project Status
+
+The project currently has a complete Machine Learning workflow through production:
+
+Raw Data
+  ↓
+Preprocessing
+  ↓
+Feature Engineering
+  ↓
+Training
+  ↓
+Evaluation
+  ↓
+LightGBM selection
+  ↓
+Optimization
+  ↓
+Model saving
+  ↓
+FastAPI
+  ↓
+Docker
+  ↓
+Render
+  ↓
+API in produciton
+
+Status
+
+🟢 Model entrenado
+
+🟢 Model guardado
+
+🟢 Pipeline modular
+
+🟢 API REST
+
+🟢 Docker
+
+🟢 GitHub Release
+
+🟢 Deployed on Render
+
+🟢 Predictions verified in production
+
+
+### 👨‍💻 Author
 
 Angel Enriquez
 
 Data Scientist | Mechatronics Engineer
 
-This project is part of my Data Science portfolio and demonstrates an end-to-end workflow, from data preprocessing and Machine Learning to production model deployment.
+This project is part of my Data Science portfolio and demonstrates a complete workflow from data processing and Machine Learning to deploying a model in production.
