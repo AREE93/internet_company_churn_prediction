@@ -107,7 +107,7 @@ class CustomerData(BaseModel):
     TotalCharges: str
 
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def root():
     return {
         "message": "Internet Company Churn Prediction API",
